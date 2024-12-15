@@ -11,7 +11,14 @@ public class RGB {
     for (int i = 0; i < rgb.length; i++) {rgb_u[i] = byteToUnsigned(rgb[i]);}
   }
   
-  public void adjustContrast(byte percentage, boolean increase) { //fix contrast lowering
+  public String getHexValue() {
+    String r = RGBtoHex(rgb_u[0]);
+    String g = RGBtoHex(rgb_u[1]);
+    String b = RGBtoHex(rgb_u[2]);    
+    return "#" + r + g + b;
+  }
+  
+  public void adjustContrast(float percentage, boolean increase) { //fix contrast lowering
     if (percentage <= 0) {return;}
     else if (percentage > 100) {percentage = 100;}
     
@@ -29,12 +36,13 @@ public class RGB {
     }
   }
   
-  public void adjustSaturation(byte percentage, boolean increase) {
+  public void adjustSaturation(float percentage, boolean increase) {
     if (percentage > 100) {percentage = 100;}
     else if (percentage <= 0) {return;}
     
     short highest = 0;
     short lowest = 255;
+    
     for (int i = 0; i < rgb_u.length; i++) {
       if (rgb_u[i] > highest) {highest = rgb_u[i];}
       else if (rgb_u[i] < lowest) {lowest = rgb_u[i];}
@@ -47,7 +55,7 @@ public class RGB {
         rgb_u[i] = (short)(rgb_u[i] - (rgb_u[i] * (1-(rgb_u[i] / highest)) * (percentage/100)));
       }
       else {
-        rgb_u[i] = (short)(rgb_u[i] + ((highest-rgb_u[i]) * (percentage/100)));
+        rgb_u[i] = (short)(rgb_u[i] + ((highest - rgb_u[i]) * (percentage/100)));
       }
       rgb[i] = (byte)rgb_u[i];
     }
@@ -88,5 +96,29 @@ public class RGB {
       if (hexdigit == chars[i]) {return values[i];}
     }
     return 0;
+  }
+  
+  private char getCharFromValue(byte digit, char[] chars, byte[] values) {
+    for (int i = 0; i < chars.length; i++) {
+      if (digit == values[i]) {return chars[i];}
+    }
+    return 0;
+  }
+  
+  private String RGBtoHex(short value) {
+    byte digit0;
+    byte digit1;
+    char digit0c;
+    char digit1c;
+    char[] chars = new char[]{'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f'};
+    byte[] values = new byte[]{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15};
+    
+    digit1 = (byte)(value % 16);
+    digit0 = (byte)((value / 16) % 16);
+    
+    digit0c = getCharFromValue(digit0, chars, values);
+    digit1c = getCharFromValue(digit1, chars, values);
+    
+    return "" + digit0c + digit1c;
   }
 }
