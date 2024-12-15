@@ -5,9 +5,9 @@ To enable a setting, uncomment it by removing the "#" at its start
 Empty or invalid settings are ignored
 
 main_class=gpaint/main
-program_name=gpaint
+#program_name=gpaint
 #release_target=21
 #graal_path=native-image
 #install_path=
-#tests_include_src=true
+tests_include_src=true
 #verbose_level=1

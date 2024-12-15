@@ -10,5 +10,11 @@ public class signed {
     
     short unsigned = 230;
     System.out.println((byte)unsigned);
+    
+    System.out.println((byte)(220+30));
+    System.out.println((byte)(220) + 30);
+    
+    System.out.println((byte)(255-200));
+    System.out.println(255-((byte)200));
   }
 }

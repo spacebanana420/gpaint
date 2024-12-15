@@ -2,28 +2,30 @@ package gpaint.themes;
 
 public class RGB {
   public byte[] rgb = new byte[]{0, 0, 0};
+  public short[] rgb_u = new short[]{0, 0, 0};
   public String hex = "";
   
   public RGB(String color_hex) {
     hex = color_hex;
     rgb = getRGB();
+    for (int i = 0; i < rgb.length; i++) {rgb_u[i] = byteToUnsigned(rgb[i]);}
   }
   
   public void adjustContrast(byte percentage, boolean increase) { //fix contrast lowering
-    if (percentage <= 0) {return;} else if (percentage > 100) {percentage = 100;}
+    if (percentage <= 0) {return;}
+    else if (percentage > 100) {percentage = 100;}
+    
     short increment = (short)(255 * (percentage/100));
     if (!increase) {increment = (short)(increment * -1);} //Lower contrast
-    if ((rgb[0] + rgb[1] + rgb[2]) / 3 < 128) {increment = (short)(increment * -1);} //Whether increase or lower brightness
+    if ((rgb_u[0] + rgb_u[1] + rgb_u[2]) / 3 < 128) {increment = (short)(increment * -1);} //Whether increase or lower brightness
     
-    short unsigned;
-    for (int i = 0; i < rgb.length; i++) {
-      unsigned = byteToUnsigned(rgb[i]);
-      if (unsigned == 0 || unsigned == 255) {continue;}
+    for (int i = 0; i < rgb_u.length; i++) {
+      if (rgb_u[i] == 0 || rgb_u[i] == 255) {continue;}
       
-      unsigned += increment;
-      if (unsigned < 0) {unsigned = 0;}
-      else if (unsigned > 255) {unsigned = 255;}
-      rgb[i] = (byte)unsigned;
+      rgb_u[i] += increment;
+      if (rgb_u[i] < 0) {rgb_u[i] = 0;}
+      else if (rgb_u[i] > 255) {rgb_u[i] = 255;}
+      rgb[i] = (byte)rgb_u[i];
     }
   }
   
@@ -31,33 +33,28 @@ public class RGB {
     if (percentage > 100) {percentage = 100;}
     else if (percentage <= 0) {return;}
     
-    short[] unsigned_rgb = new short[3];
-    for (int i = 0; i < unsigned_rgb.length; i++) {unsigned_rgb[i] = byteToUnsigned(rgb[i]);}
-    
     short highest = 0;
     short lowest = 255;
-    for (int i = 0; i < unsigned_rgb.length; i++) {
-      if (unsigned_rgb[i] > highest) {highest = unsigned_rgb[i];}
-      else if (unsigned_rgb[i] < lowest) {lowest = unsigned_rgb[i];}
+    for (int i = 0; i < rgb_u.length; i++) {
+      if (rgb_u[i] > highest) {highest = rgb_u[i];}
+      else if (rgb_u[i] < lowest) {lowest = rgb_u[i];}
     }
     
-    for (int i = 0; i < unsigned_rgb.length; i++)
+    for (int i = 0; i < rgb_u.length; i++)
     {
-      if (unsigned_rgb[i] == highest) {continue;}
+      if (rgb_u[i] == highest) {continue;}
       if (increase) {
-        unsigned_rgb[i] = (short)(unsigned_rgb[i] - (unsigned_rgb[i] * (1-(unsigned_rgb[i] / highest)) * (percentage/100)));
+        rgb_u[i] = (short)(rgb_u[i] - (rgb_u[i] * (1-(rgb_u[i] / highest)) * (percentage/100)));
       }
       else {
-        unsigned_rgb[i] = (short)(unsigned_rgb[i] + ((highest-unsigned_rgb[i]) * (percentage/100)));
+        rgb_u[i] = (short)(rgb_u[i] + ((highest-rgb_u[i]) * (percentage/100)));
       }
-      rgb[i] = (byte)unsigned_rgb[i];
+      rgb[i] = (byte)rgb_u[i];
     }
   }
   
   public void invertColors() {
-    for (int i = 0; i < rgb.length; i++) {
-      rgb[i] = (byte)(255 - byteToUnsigned(rgb[i]));
-    }
+    for (int i = 0; i < rgb_u.length; i++) {rgb_u[i] = (short)(255 - rgb_u[i]);}
   }
   
   //this might slow down things but it makes it simpler, i wish java had unsigned data types holy shit
