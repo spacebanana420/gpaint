@@ -30,8 +30,11 @@ public class main {
       return;
     }
     
-    if (!cli.hasColorAdjustments(args)) {help.printDefaultMessage(); return;}
-    for (String themeFile : cli.getThemeFiles(args, themes_dir)) {
+    String[] themeFiles = cli.getThemeFiles(args, themes_dir);
+    if (themeFiles.length == 0) {help.printThemeLack(); return;}
+    if (!cli.hasColorAdjustments(args)) {help.printTaskLack(); return;}
+    
+    for (String themeFile : themeFiles) {
       String[] lines = fileio.readFile(themeFile);
       themeparse.convertTheme(lines, args);
       String new_path = generateNewFilename(themeFile);
