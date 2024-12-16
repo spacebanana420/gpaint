@@ -1,7 +1,6 @@
 package gpaint.themes;
 
-//import java.io.FileInputStream;
-//import java.io.FileOutputStream;
+import java.io.FileOutputStream;
 import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -9,7 +8,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class fileio {
-  public static String[] readFile(String file, boolean ignore_comments) {
+  public static String[] readFile(String file) {
     if (!new File(file).isFile()) {return null;}
     try {
       byte[] file_data = Files.readAllBytes(Path.of(file));
@@ -20,7 +19,7 @@ public class fileio {
       {
         char c = file_string.charAt(i);
         if (c == '\n') {
-          boolean ignore_line = line.length() == 0 || (ignore_comments && line.charAt(0) == '#');
+          boolean ignore_line = line.length() == 0;
           if (!ignore_line) {lines.add(line);}
           line = "";
           continue;
@@ -30,5 +29,18 @@ public class fileio {
       return lines.toArray(new String[0]);
     }
     catch (IOException e) {return null;}
+  }
+  
+  public static boolean writeFile(String[] lines, String path) {
+    String full_content = "";
+    for (String line: lines) {full_content += line + "\n";}
+    byte[] file = full_content.getBytes();
+    try {
+      var fileout = new FileOutputStream(path);
+      fileout.write(file);
+      fileout.close();
+      return true;
+    }
+    catch (IOException e) {return false;}
   }
 }

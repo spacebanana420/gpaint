@@ -5,7 +5,20 @@ import java.io.File;
 
 public class cli {
   
+  public static boolean askedForHelp(String[] args) {return hasArgument(args, "-h");}
+  
   public static boolean listGeanyThemes(String[] args) {return hasArgument(args, "-list");}
+  
+  public static String[] getThemeFiles(String[] args, String theme_path) {
+    var files = new ArrayList<String>();
+    for (String a : args) {
+      var f = new File(a);
+      var f_conf = new File(theme_path + "/" + a);
+      boolean isFile = (f.isFile() && f.canRead()) || (f_conf.isFile() && f_conf.canRead());
+      if (!isArgument(a) && isFile && a.contains(".conf")) {files.add(a);}
+    }
+    return files.toArray(new String[0]);
+  }
   
   public static byte getContrastAdd(String[] args) {
     String contrast = getArgumentValue(args, "+contrast");
