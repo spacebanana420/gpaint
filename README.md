@@ -9,7 +9,7 @@ GPaint is a theme editor for [Geany themes](https://www.geany.org/download/theme
 
 ## Download and run
 
-Grab the latest release of Geany from the [releases page](https://github.com/spacebanana420/gpaint/releases) and run the JAR with ´java -jar´. Run ´java -jar gpaint.jar -h´ to see what you can do.
+Grab the latest release of Geany from the [releases page](https://github.com/spacebanana420/gpaint/releases) and run `java -jar gpaint.jar -h` to see what you can do.
 
 # Build from source
 
