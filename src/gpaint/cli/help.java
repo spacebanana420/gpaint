@@ -21,7 +21,7 @@ public class help {
   public static void printDefaultMessage() {
     System.out.println
     (
-      "Gpaint v0.1"
+      "Gpaint v0.1\n"
       + "\nYou have not specified any Geany theme!"
       + "\nRun gpaint -h to see what you can do"
       + "\nRun gpaint -list to list the available Geany themes in your user config"

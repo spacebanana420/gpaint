@@ -13,10 +13,6 @@ public class main {
       help.printHelp();
       return;
     }
-    if (!cli.hasColorAdjustments(args)) {
-      help.printDefaultMessage();
-      return;
-    }
     
     String themes_dir = getThemeDirectory();
     if (cli.listGeanyThemes(args)) {
@@ -36,6 +32,11 @@ public class main {
         }
         System.out.println(txt);
       }
+      return;
+    }
+    
+    if (!cli.hasColorAdjustments(args)) {
+      help.printDefaultMessage();
       return;
     }
     for (String themeFile : cli.getThemeFiles(args, themes_dir)) {
