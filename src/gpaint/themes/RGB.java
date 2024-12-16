@@ -27,8 +27,6 @@ public class RGB {
     if ((rgb_u[0] + rgb_u[1] + rgb_u[2]) / 3 < 128) {increment = (short)(increment * -1);} //Whether increase or lower brightness
     
     for (int i = 0; i < rgb_u.length; i++) {
-      if (rgb_u[i] == 0 || rgb_u[i] == 255) {continue;}
-      
       rgb_u[i] += increment;
       if (rgb_u[i] < 0) {rgb_u[i] = 0;}
       else if (rgb_u[i] > 255) {rgb_u[i] = 255;}
@@ -48,14 +46,15 @@ public class RGB {
       else if (rgb_u[i] < lowest) {lowest = rgb_u[i];}
     }
     
+    float percentage_factor = percentage/100;
     for (int i = 0; i < rgb_u.length; i++)
     {
       if (rgb_u[i] == highest) {continue;}
       if (increase) {
-        rgb_u[i] = (short)(rgb_u[i] - (rgb_u[i] * (1-(rgb_u[i] / highest)) * (percentage/100)));
+        rgb_u[i] = (short)(rgb_u[i] - (rgb_u[i] * (1-(rgb_u[i] / highest)) * percentage_factor));
       }
       else {
-        rgb_u[i] = (short)(rgb_u[i] + ((highest - rgb_u[i]) * (percentage/100)));
+        rgb_u[i] = (short)(rgb_u[i] + ((highest - rgb_u[i]) * percentage_factor));
       }
       rgb[i] = (byte)rgb_u[i];
     }
