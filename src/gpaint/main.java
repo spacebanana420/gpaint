@@ -9,10 +9,7 @@ import java.io.File;
 
 public class main {
   public static void main(String[] args) {
-    if (cli.askedForHelp(args)) {
-      help.printHelp();
-      return;
-    }
+    if (cli.askedForHelp(args)) {help.printHelp(); return;}
     
     String themes_dir = getThemeDirectory();
     if (cli.listGeanyThemes(args)) {
@@ -27,18 +24,13 @@ public class main {
       }
       else {
         String txt = "Available Geany themes in " + themes_dir + ":\n";
-        for (String theme : themes) {
-          txt+= "  * " + theme + "\n";
-        }
+        for (String theme : themes) {txt+= "  * " + theme + "\n";}
         System.out.println(txt);
       }
       return;
     }
     
-    if (!cli.hasColorAdjustments(args)) {
-      help.printDefaultMessage();
-      return;
-    }
+    if (!cli.hasColorAdjustments(args)) {help.printDefaultMessage(); return;}
     for (String themeFile : cli.getThemeFiles(args, themes_dir)) {
       String[] lines = fileio.readFile(themeFile);
       themeparse.convertTheme(lines, args);
