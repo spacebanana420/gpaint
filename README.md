@@ -1,6 +1,6 @@
-# gpaint
+# GPaint
 
-GPaint is a theme editor for [Geany themes](https://www.geany.org/download/themes/). It allows you to adjust and manipulates the colors of a theme with contrast, saturation and more.
+GPaint is a theme editor for [Geany themes](https://www.geany.org/download/themes/). It allows you to adjust and manipulate the colors of a theme with contrast, saturation and more.
 
 # Requirements and how to use
 
