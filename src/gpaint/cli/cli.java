@@ -11,16 +11,19 @@ public class cli {
   
   public static String[] getThemeFiles(String[] args, String theme_path) {
     var files = new ArrayList<String>();
-    for (String a : args) {
+    for (String a : args)
+    {
       String full_path = theme_path + "/" + a;
       var f = new File(a);
       var f_conf = new File(full_path);
-      boolean isFullPath = f.isFile() && f.canRead();
-      boolean isGeanyPath = f_conf.isFile() && f_conf.canRead();
-      boolean isFile = isFullPath || isGeanyPath;
+      
+      boolean pathIsCorrect = f.isFile() && f.canRead();
+      boolean isInGeanyConf = f_conf.isFile() && f_conf.canRead();
+      boolean isFile = pathIsCorrect || isInGeanyConf;
 
       if (!isArgument(a) && isFile && a.contains(".conf")) {
-        if (isFullPath){files.add(a);} else {files.add(full_path);}
+        if (pathIsCorrect) {files.add(a);}
+        else {files.add(full_path);}
       }
     }
     return files.toArray(new String[0]);
