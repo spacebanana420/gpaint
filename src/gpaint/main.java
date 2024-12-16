@@ -59,10 +59,10 @@ public class main {
     return f.list();
   }
   
-  static String[] generateNewFilename(String path) {
+  static String generateNewFilename(String path) {
     String name = "";
     int extension_i = -1;
-    for (int i = path.length()-1; i >= 0); i--) {
+    for (int i = path.length()-1; i >= 0; i--) {
       char c = path.charAt(i);
       if (c == '.') {extension_i = i; break;}
     }
