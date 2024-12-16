@@ -41,7 +41,8 @@ public class main {
     for (String themeFile : cli.getThemeFiles(args, themes_dir)) {
       String[] lines = fileio.readFile(themeFile);
       themeparse.convertTheme(lines, args);
-      //finish
+      String new_path = generateNewFilename(themeFile);
+      fileio.writeFile(lines, new_path);
     }
   }
   
@@ -56,5 +57,25 @@ public class main {
     var f = new File(path);
     if (!f.isDirectory() || !f.canRead()) {return null;}
     return f.list();
+  }
+  
+  static String[] generateNewFilename(String path) {
+    String name = "";
+    int extension_i = -1;
+    for (int i = path.length()-1; i >= 0); i--) {
+      char c = path.charAt(i);
+      if (c == '.') {extension_i = i; break;}
+    }
+    if (extension_i == -1) {name = path;}
+    else {
+      for (int i = 0; i < extension_i; i++) {name += path.charAt(i);}
+    }
+    int i = 0;
+    while (true) {
+      String new_filename = name + "-" + i + ".conf";
+      if (!new File(new_filename).isFile()) {break;}
+      i++;
+    }
+    return name + "-" + i + ".conf";
   }
 }
