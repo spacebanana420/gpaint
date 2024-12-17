@@ -13,7 +13,7 @@ public class themeparse {
   }
   
   private static void changeThemeName(String[] lines) {
-    for (int i = 0; i < lines.length(); i++)
+    for (int i = 0; i < lines.length; i++)
     {
       if (lines[i].contains("name=") || lines[i].contains("name ="))
       {
