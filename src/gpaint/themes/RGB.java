@@ -22,9 +22,11 @@ public class RGB {
     if (percentage <= 0) {return;}
     else if (percentage > 100) {percentage = 100;}
     
-    short increment = (short)(255 * (percentage/100));
+    float increment = (float)(255 * (percentage/100));
+    float average = (rgb_u[0] + rgb_u[1] + rgb_u[2]) / 3;
     if (!increase) {increment = (short)(increment * -1);} //Lower contrast
-    if ((rgb_u[0] + rgb_u[1] + rgb_u[2]) / 3 < 128) {increment = (short)(increment * -1);} //Whether increase or lower brightness
+    if (average < 128) {increment = (short)(increment * -1);} //Whether increase or lower brightness
+    else if (average == 128) {return;}
 
     short highest = 0;
     for (int i = 0; i < rgb_u.length; i++) {
