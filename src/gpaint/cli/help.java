@@ -16,6 +16,7 @@ public class help {
       + "\n  * -sat [percentage] - lowers saturation from 0 to 100"
       + "\n  * +bright [percentage] - raises brightness from 0 to 100"
       + "\n  * -bright [percentage] - lowers brightness from 0 to 100"
+      + "\n  * -temp [percentage] - lowers color temperature from 0 to 100"
       + "\n  * -invert - inverts the theme colors"
     );
   }

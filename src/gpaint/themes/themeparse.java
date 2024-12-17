@@ -81,6 +81,9 @@ public class themeparse {
       if (percentage != -1) {color.adjustBrightness((float)percentage, false);}
     }
     
+    percentage = cli.getTemperatureSub(args);
+    if (percentage != -1) {color.lowerTemperature((float)percentage);}
+    
     if (cli.invertColors(args)) {color.invertColors();}
     
     return color.getHexValue();

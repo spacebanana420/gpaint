@@ -69,9 +69,9 @@ public class RGB {
       rgb[i] = (byte)rgb_u[i];
     }
   }
-  
+    
   public void invertColors() {
-    for (int i = 0; i < rgb_u.length; i++) {rgb_u[i] = (short)(255 - rgb_u[i]);}
+    for (int i = 0; i < rgb_u.length; i++) {rgb_u[i] = (short)(255-rgb_u[i]);}
   }
   
   public void adjustBrightness(float percentage, boolean increase) {
@@ -80,7 +80,24 @@ public class RGB {
     
     float brightness = (float)(255 * (percentage/100));
     if (!increase) {brightness = (float)(brightness * -1);}
-    for (int i = 0; i < rgb_u.length; i++) {rgb_u[i] += brightness;}
+    for (int i = 0; i < rgb_u.length; i++) {
+      rgb_u[i] += brightness;
+      if (rgb_u[i] > 255) {rgb_u[i] = 255;}
+    }
+  }
+  
+  public void lowerTemperature(float percentage) {
+    if (percentage <= 0) {return;}
+    else if (percentage > 100) {percentage = 100;}
+    
+    float reduction_percent = 1-(percentage/100);
+    short reduction_blue = (short)(rgb_u[2] - (rgb_u[2] * reduction_percent));
+    short reduction_green = (short)(reduction_blue * 0.2f);
+    rgb_u[2] -= reduction_blue;
+    rgb_u[1] -= reduction_green;
+    
+    if (rgb_u[1] < 0) {rgb_u[1] = 0;}
+    if (rgb_u[2] < 0) {rgb_u[2] = 0;}
   }
   
   //this might slow down things but it makes it simpler, i wish java had unsigned data types holy shit

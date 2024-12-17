@@ -49,8 +49,6 @@ public class cli {
     return getPercentage(sat);
   }
   
-  public static boolean invertColors(String[] args) {return hasArgument(args, "-invert");}
-  
   public static byte getBrightnessAdd(String[] args) {
     String b = getArgumentValue(args, "+bright");
     return getPercentage(b);
@@ -61,11 +59,20 @@ public class cli {
     return getPercentage(b);
   }
   
+  public static byte getTemperatureSub(String[] args) {
+    String temp = getArgumentValue(args, "-temp");
+    return getPercentage(temp);
+  }
+  
+  public static boolean invertColors(String[] args) {return hasArgument(args, "-invert");}
+  
   public static boolean hasColorAdjustments(String[] args) {
     return
       hasArgument(args, "+sat") || hasArgument(args, "-sat")
       || hasArgument(args, "+contrast") || hasArgument(args, "-contrast")
       || hasArgument(args, "-invert")
+      || hasArgument(args, "+bright") || hasArgument(args, "-bright")
+      || hasArgument(args, "-temp")
     ;
   } 
   
