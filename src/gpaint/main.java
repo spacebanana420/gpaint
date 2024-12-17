@@ -71,10 +71,10 @@ public class main {
     int i = 0;
     while (true)
     {
-      String new_filename = name + "-" + i + ".conf";
+      String new_filename = name + "-GPaint-" + i + ".conf";
       if (!new File(new_filename).isFile()) {break;}
       i++;
     }
-    return name + "-" + i + ".conf";
+    return name + "-GPaint-" + i + ".conf";
   }
 }

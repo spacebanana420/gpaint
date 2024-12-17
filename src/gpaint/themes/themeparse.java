@@ -5,8 +5,21 @@ import java.util.ArrayList;
 
 public class themeparse {
   public static void convertTheme(String[] lines, String[] args) {
-    for (int i = 0; i < lines.length; i++) {
+    changeThemeName(lines);
+    for (int i = 0; i < lines.length; i++)
+    {
       lines[i] = convertLine(lines[i], args);
+    }
+  }
+  
+  private static void changeThemeName(String[] lines) {
+    for (int i = 0; i < lines.length(); i++)
+    {
+      if (lines[i].contains("name=") || lines[i].contains("name ="))
+      {
+        lines[i] += " (GPaint version)";
+        return;
+      }
     }
   }
   
