@@ -108,6 +108,11 @@ public class RGB {
     if (hex.length() < 2) {return null;}
     //int = 1 to ignore first # character
     for (int i = 1; i < hex.length(); i++) {hex_value += hex.charAt(i);}
+    if (hex_value.length() == 3) {
+      String hex_6digit = "";
+      for (int i = 0; i < hex_value.length(); i++) {hex_6digit += hex_value.charAt(i); hex_6digit += hex_value.charAt(i);}
+      hex_value = hex_6digit;
+    }
     while (hex_value.length() < 6) {hex_value += '0';}
     return new byte[]
     {

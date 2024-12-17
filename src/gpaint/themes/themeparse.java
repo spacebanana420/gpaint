@@ -57,7 +57,7 @@ public class themeparse {
   //replace with floats later
   private static String processHexValue(String value, String[] args) {
     String hex = value.trim();
-    if (hex == null || hex.length() < 2 || hex.length() > 7 || hex.charAt(0) != '#') {return value;}
+    if (hex == null || (hex.length() != 4 && hex.length() != 7) || hex.charAt(0) != '#') {return value;}
     RGB color = new RGB(hex);
     
     byte percentage = cli.getContrastAdd(args);
