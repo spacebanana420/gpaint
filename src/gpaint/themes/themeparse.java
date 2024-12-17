@@ -24,7 +24,7 @@ public class themeparse {
   }
   
   private static String convertLine(String line, String[] args) {
-    if (line.charAt(0) == '#' || !line.contains("=")) {return line;}
+    if (line.equals("") || line.charAt(0) == '#' || !line.contains("=")) {return line;}
     
     String newline = "";
     var line_values = new ArrayList<String>();

@@ -19,10 +19,8 @@ public class fileio {
       {
         char c = file_string.charAt(i);
         if (c == '\n') {
-          boolean ignore_line = line.length() == 0;
-          if (!ignore_line) {lines.add(line);}
+          lines.add(line);
           line = "";
-          continue;
         }
         else {line += c;}
       }
