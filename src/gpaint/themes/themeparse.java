@@ -46,11 +46,11 @@ public class themeparse {
     }
     if (value_buffer.length() > 0) {line_values.add(value_buffer);}
     
-    for (int i = 0; i < line_values.size(); i++) {
-      String newvalue = processHexValue(line_values.get(i), args);
-      if (i == line_values.size()-1) {newline+=newvalue;}
-      else {newline+=newvalue+';';}
+    int values_size = line_values.size();
+    for (int i = 0; i < values_size-1; i++) {
+      newline += processHexValue(line_values.get(i), args) + ';';
     }
+    newline += processHexValue(line_values.get(values_size-1), args); //last element doesn't require a semicolon ;
     return newline;
   }
  
