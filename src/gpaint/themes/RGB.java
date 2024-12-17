@@ -6,7 +6,7 @@ public class RGB {
   public String hex = "";
   
   public RGB(String color_hex) {
-    hex = color_hex;
+    hex = color_hex.toLowerCase();
     rgb = getRGB();
     for (int i = 0; i < rgb.length; i++) {rgb_u[i] = byteToUnsigned(rgb[i]);}
   }
@@ -25,9 +25,15 @@ public class RGB {
     short increment = (short)(255 * (percentage/100));
     if (!increase) {increment = (short)(increment * -1);} //Lower contrast
     if ((rgb_u[0] + rgb_u[1] + rgb_u[2]) / 3 < 128) {increment = (short)(increment * -1);} //Whether increase or lower brightness
-    
+
+    short highest = 0;
     for (int i = 0; i < rgb_u.length; i++) {
-      rgb_u[i] += increment;
+      if (rgb_u[i] > highest) {highest = rgb_u[i];}
+    }
+    float factor = (highest == 0) ? 1 : highest;
+
+    for (int i = 0; i < rgb_u.length; i++) {
+      rgb_u[i] += increment * (rgb_u[i]/factor);
       if (rgb_u[i] < 0) {rgb_u[i] = 0;}
       else if (rgb_u[i] > 255) {rgb_u[i] = 255;}
       rgb[i] = (byte)rgb_u[i];
@@ -37,6 +43,7 @@ public class RGB {
   public void adjustSaturation(float percentage, boolean increase) {
     if (percentage > 100) {percentage = 100;}
     else if (percentage <= 0) {return;}
+    if (rgb_u[0] == rgb_u[1] && rgb_u[0] == rgb_u[2]) {return;}
     
     short highest = 0;
     short lowest = 255;
@@ -45,6 +52,7 @@ public class RGB {
       if (rgb_u[i] > highest) {highest = rgb_u[i];}
       else if (rgb_u[i] < lowest) {lowest = rgb_u[i];}
     }
+    if (highest == 0) {return;}
     
     float percentage_factor = percentage/100;
     for (int i = 0; i < rgb_u.length; i++)
