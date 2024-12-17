@@ -4,12 +4,12 @@ public class help {
   public static void printHelp() {
     System.out.println
     (
-      "==GPaint v0.1=="
+      "==GPaint v0.2=="
       + "\nUsage: gpaint [options] [theme files...]"
       + "\n"
       + "\n==Options=="
-      + "\n  * -h - opens this menu"
-      + "\n  * -list - lists available Geany themes"
+      + "\n  * -h (--help) - opens this menu"
+      + "\n  * -l (--list) - lists available Geany themes"
       + "\n  * +contrast [percentage] - raises contrast from 0 to 100"
       + "\n  * -contrast [percentage] - lowers contrast from 0 to 100"
       + "\n  * +sat [percentage] - raises saturation from 0 to 100"
@@ -23,8 +23,8 @@ public class help {
     (
       "Gpaint v0.2\n"
       + "\nYou have not specified any Geany theme!"
-      + "\nRun gpaint -h to see what you can do"
-      + "\nRun gpaint -list to list the available Geany themes in your user config"
+      + "\nRun \"gpaint -h\" to see what you can do"
+      + "\nRun \"gpaint -l\" to list the available Geany themes in your user config"
     );
   }
   
@@ -33,7 +33,7 @@ public class help {
     (
       "Gpaint v0.2\n"
       + "\nYou have not specified any task to perform on the themes!"
-      + "\nRun gpaint -h to see what you can do"
+      + "\nRun \"gpaint -h\" to see what you can do"
     );
   }
 }
