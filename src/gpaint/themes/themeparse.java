@@ -73,6 +73,14 @@ public class themeparse {
       percentage = cli.getSaturationSub(args);
       if (percentage != -1) {color.adjustSaturation((float)percentage, false);}
     }
+    
+    percentage = cli.getBrightnessAdd(args);
+    if (percentage != -1) {color.adjustBrightness((float)percentage, true);}
+    else {
+      percentage = cli.getBrightnessSub(args);
+      if (percentage != -1) {color.adjustBrightness((float)percentage, false);}
+    }
+    
     if (cli.invertColors(args)) {color.invertColors();}
     
     return color.getHexValue();

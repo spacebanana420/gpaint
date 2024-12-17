@@ -51,6 +51,16 @@ public class cli {
   
   public static boolean invertColors(String[] args) {return hasArgument(args, "-invert");}
   
+  public static byte getBrightnessAdd(String[] args) {
+    String b = getArgumentValue(args, "+bright");
+    return getPercentage(b);
+  }
+  
+  public static byte getBrightnessSub(String[] args) {
+    String b = getArgumentValue(args, "-bright");
+    return getPercentage(b);
+  }
+  
   public static boolean hasColorAdjustments(String[] args) {
     return
       hasArgument(args, "+sat") || hasArgument(args, "-sat")

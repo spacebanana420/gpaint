@@ -74,6 +74,15 @@ public class RGB {
     for (int i = 0; i < rgb_u.length; i++) {rgb_u[i] = (short)(255 - rgb_u[i]);}
   }
   
+  public void adjustBrightness(float percentage, boolean increase) {
+    if (percentage <= 0) {return;}
+    else if (percentage > 100) {percentage = 100;}
+    
+    float brightness = (float)(255 * (percentage/100));
+    if (!increase) {brightness = (float)(brightness * -1);}
+    for (int i = 0; i < rgb_u.length; i++) {rgb_u[i] += brightness;}
+  }
+  
   //this might slow down things but it makes it simpler, i wish java had unsigned data types holy shit
   private short byteToUnsigned(byte b) {return (b >= 0) ? b : (short)(256 - (b * -1));}
   

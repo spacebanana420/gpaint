@@ -14,6 +14,8 @@ public class help {
       + "\n  * -contrast [percentage] - lowers contrast from 0 to 100"
       + "\n  * +sat [percentage] - raises saturation from 0 to 100"
       + "\n  * -sat [percentage] - lowers saturation from 0 to 100"
+      + "\n  * +bright [percentage] - raises brightness from 0 to 100"
+      + "\n  * -bright [percentage] - lowers brightness from 0 to 100"
       + "\n  * -invert - inverts the theme colors"
     );
   }
