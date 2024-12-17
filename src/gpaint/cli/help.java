@@ -21,7 +21,7 @@ public class help {
   public static void printThemeLack() {
     System.out.println
     (
-      "Gpaint v0.1\n"
+      "Gpaint v0.2\n"
       + "\nYou have not specified any Geany theme!"
       + "\nRun gpaint -h to see what you can do"
       + "\nRun gpaint -list to list the available Geany themes in your user config"
@@ -31,7 +31,7 @@ public class help {
   public static void printTaskLack() {
     System.out.println
     (
-      "Gpaint v0.1\n"
+      "Gpaint v0.2\n"
       + "\nYou have not specified any task to perform on the themes!"
       + "\nRun gpaint -h to see what you can do"
     );
