@@ -7,7 +7,7 @@ public class cli {
   
   public static boolean askedForHelp(String[] args) {return hasArgument(args, "-h") || hasArgument(args, "--help");}
   
-  public static boolean listGeanyThemes(String[] args) {return hasArgument(args, "--list") || hasArgument(args, "--list");}
+  public static boolean listGeanyThemes(String[] args) {return hasArgument(args, "-l") || hasArgument(args, "--list");}
   
   public static String[] getThemeFiles(String[] args, String theme_path) {
     var files = new ArrayList<String>();
