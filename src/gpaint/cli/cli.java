@@ -10,7 +10,15 @@ public class cli {
   public static boolean listGeanyThemes(String[] args) {return hasArgument(args, "-l") || hasArgument(args, "--list");}
   
   public static String getCustomFilename(String[] args) {
-    int i = findArgument(args, "-n", "--name");
+    return getname_generic(args, "-o", "--output");
+  }
+  
+  public static String getCustomThemeName(String[] args) {
+    return getname_generic(args, "-n", "--name");
+  }
+  
+  private static String getname_generic(String[] args, String... arguments) {
+    int i = findArgument(args, arguments);
     if (i == -1 || i == args.length-1) {return null;}
     String name = args[i+1];
     if (name == null || name.length() == 0 || name.charAt(0) == '-') {return null;}

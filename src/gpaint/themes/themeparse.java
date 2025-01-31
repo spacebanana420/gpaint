@@ -4,23 +4,36 @@ import gpaint.cli.cli;
 import java.util.ArrayList;
 
 public class themeparse {
-  public static void convertTheme(String[] lines, String[] args) {
-    changeThemeName(lines);
+  public static void convertTheme(String[] lines, String[] args, String customname) {
+    changeThemeName(lines, customname);
     for (int i = 0; i < lines.length; i++)
     {
       lines[i] = convertLine(lines[i], args);
     }
   }
   
-  private static void changeThemeName(String[] lines) {
+  private static void changeThemeName(String[] lines, String customname) {
+    boolean hasCustomName = customname != null;
     for (int i = 0; i < lines.length; i++)
     {
-      if (lines[i].contains("name=") || lines[i].contains("name ="))
+      boolean validName = hasCustomName || !lines[i].contains("(GPaint version)");
+      if (lines[i].contains("name=") || lines[i].contains("name =") && validName)
       {
-        lines[i] += " (GPaint version)";
+        if (hasCustomName) {lines[i] = addCustomName(lines[i], customname);}
+        else {lines[i] += " (GPaint version)";}
         return;
       }
     }
+  }
+  
+  private static String addCustomName(String line, String name) {
+    String newline = "";
+    for (int i = 0; i < line.length(); i++) {
+      char c = line.charAt(i);
+      newline += c;
+      if (c == '=') {break;}
+    }
+    return newline + name;
   }
   
   private static String convertLine(String line, String[] args) {

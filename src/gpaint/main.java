@@ -37,7 +37,7 @@ public class main {
     for (String themeFile : themeFiles)
     {
       String[] lines = fileio.readFile(themeFile);
-      themeparse.convertTheme(lines, args);
+      themeparse.convertTheme(lines, args, cli.getCustomThemeName(args));
       String new_path = generateNewFilename(themeFile, cli.getCustomFilename(args));
       fileio.writeFile(lines, new_path);
     }
