@@ -27,17 +27,19 @@ public class cli {
   
   public static String[] getThemeFiles(String[] args, String theme_path) {
     var files = new ArrayList<String>();
-    for (String a : args)
+    for (int i = 0; i < args.length; i++)
     {
+      String a = args[i];
       String full_path = theme_path + "/" + a;
       var f = new File(a);
       var f_conf = new File(full_path);
       
       boolean pathIsCorrect = f.isFile() && f.canRead();
       boolean isInGeanyConf = f_conf.isFile() && f_conf.canRead();
+      boolean notOutputName = i == 0 || (!args[i-1].equals("-o") && !args[i-1].equals("--output") && !args[i-1].equals("-n") && !args[i-1].equals("--name"));
       boolean isFile = pathIsCorrect || isInGeanyConf;
 
-      if (!isArgument(a) && isFile) {
+      if (!isArgument(a) && isFile && notOutputName) {
         if (pathIsCorrect) {files.add(a);}
         else {files.add(full_path);}
       }
