@@ -9,6 +9,14 @@ public class cli {
   
   public static boolean listGeanyThemes(String[] args) {return hasArgument(args, "-l") || hasArgument(args, "--list");}
   
+  public static String getCustomFilename(String[] args) {
+    int i = findArgument(args, "-n", "--name");
+    if (i == -1 || i == args.length-1) {return null;}
+    String name = args[i+1];
+    if (name == null || name.length() == 0 || name.charAt(0) == '-') {return null;}
+    return name;
+  }
+  
   public static String[] getThemeFiles(String[] args, String theme_path) {
     var files = new ArrayList<String>();
     for (String a : args)
@@ -21,7 +29,7 @@ public class cli {
       boolean isInGeanyConf = f_conf.isFile() && f_conf.canRead();
       boolean isFile = pathIsCorrect || isInGeanyConf;
 
-      if (!isArgument(a) && isFile && a.contains(".conf")) {
+      if (!isArgument(a) && isFile) {
         if (pathIsCorrect) {files.add(a);}
         else {files.add(full_path);}
       }
@@ -94,6 +102,15 @@ public class cli {
   }
 
   private static boolean hasArgument(String[] args, String argument) {return findArgument(args, argument) != -1;}
+  
+  private static int findArgument(String[] args, String... arguments) {
+    int i = -1;
+    for (String a : arguments) {
+      i = findArgument(args, a);
+      if (i != -1) {return i;}
+    }
+    return i;
+  }
   
   private static int findArgument(String[] args, String argument) {
     for (int i = 0; i < args.length; i++) {

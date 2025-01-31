@@ -102,7 +102,7 @@ public class RGB {
   
   //this might slow down things but it makes it simpler, i wish java had unsigned data types holy shit
   //private short byteToUnsigned(byte b) {return (b >= 0) ? b : (short)(256 - (b * -1));}
-  private short byteToUnsigned(byte b) {return b & 255;}
+  private short byteToUnsigned(byte b) {return (short)(b & 255);}
   
   private byte[] getRGB() {
     String hex_value = "";

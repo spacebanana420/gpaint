@@ -38,7 +38,7 @@ public class main {
     {
       String[] lines = fileio.readFile(themeFile);
       themeparse.convertTheme(lines, args);
-      String new_path = generateNewFilename(themeFile);
+      String new_path = generateNewFilename(themeFile, cli.getCustomFilename(args));
       fileio.writeFile(lines, new_path);
     }
   }
@@ -56,7 +56,8 @@ public class main {
     return f.list();
   }
   
-  static String generateNewFilename(String path) {
+  static String generateNewFilename(String path, String customname) {
+    if (customname != null && !new File(customname).isFile()) {return customname;}
     String name = "";
     int extension_i = -1;
     for (int i = path.length()-1; i >= 0; i--)
