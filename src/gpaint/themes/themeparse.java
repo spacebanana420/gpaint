@@ -60,31 +60,28 @@ public class themeparse {
     if (hex == null || (hex.length() != 4 && hex.length() != 7) || hex.charAt(0) != '#') {return value;}
     RGB color = new RGB(hex);
     
+    if (cli.invertColors(args)) {color.invertColors();}
+    
     byte percentage = cli.getContrastAdd(args);
     if (percentage != -1) {color.adjustContrast((float)percentage, true);}
     else {
       percentage = cli.getContrastSub(args);
       if (percentage != -1) {color.adjustContrast((float)percentage, false);}
     }
-    
     percentage = cli.getSaturationAdd(args);
     if (percentage != -1) {color.adjustSaturation((float)percentage, true);}
     else {
       percentage = cli.getSaturationSub(args);
       if (percentage != -1) {color.adjustSaturation((float)percentage, false);}
     }
-    
     percentage = cli.getBrightnessAdd(args);
     if (percentage != -1) {color.adjustBrightness((float)percentage, true);}
     else {
       percentage = cli.getBrightnessSub(args);
       if (percentage != -1) {color.adjustBrightness((float)percentage, false);}
     }
-    
     percentage = cli.getTemperatureSub(args);
     if (percentage != -1) {color.lowerTemperature((float)percentage);}
-    
-    if (cli.invertColors(args)) {color.invertColors();}
     
     return color.getHexValue();
   }
