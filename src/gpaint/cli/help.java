@@ -1,7 +1,7 @@
 package gpaint.cli;
 
 public class help {
-  static String version() {return "[GPaint v0.2.1]";}
+  static String version() {return "[GPaint v0.3]";}
   
   public static void printHelp() {
     System.out.println
