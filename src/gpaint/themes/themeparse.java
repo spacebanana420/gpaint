@@ -6,10 +6,7 @@ import java.util.ArrayList;
 public class themeparse {
   public static void convertTheme(String[] lines, String[] args, String customname) {
     changeThemeName(lines, customname);
-    for (int i = 0; i < lines.length; i++)
-    {
-      lines[i] = convertLine(lines[i], args);
-    }
+    for (int i = 0; i < lines.length; i++) {lines[i] = convertLine(lines[i], args);}
   }
   
   private static void changeThemeName(String[] lines, String customname) {
@@ -17,7 +14,7 @@ public class themeparse {
     for (int i = 0; i < lines.length; i++)
     {
       boolean validName = hasCustomName || !lines[i].contains("(GPaint version)");
-      if (lines[i].contains("name=") || lines[i].contains("name =") && validName)
+      if ((lines[i].contains("name=") || lines[i].contains("name =")) && validName)
       {
         if (hasCustomName) {lines[i] = addCustomName(lines[i], customname);}
         else {lines[i] += " (GPaint version)";}
@@ -49,7 +46,8 @@ public class themeparse {
     }
     
     String value_buffer = "";
-    for (int i = values_start; i < line.length(); i++) { //add the values to a list to process them flexibly
+    for (int i = values_start; i < line.length(); i++) //add the values to a list to process them flexibly
+    {
       char c = line.charAt(i);
       if (c == ';' && value_buffer.length() > 0) {
         line_values.add(value_buffer);
@@ -58,13 +56,13 @@ public class themeparse {
       else {value_buffer += c;}
     }
     if (value_buffer.length() > 0) {line_values.add(value_buffer);}
+    if (line_values.size() == 0) {return line;}
     
-    int values_size = line_values.size();
-    for (int i = 0; i < values_size-1; i++) {
+    int loop_end = line_values.size()-1;
+    for (int i = 0; i < loop_end; i++) { //last element doesn't require a semicolon ;
       newline += processHexValue(line_values.get(i), args) + ';';
     }
-    newline += processHexValue(line_values.get(values_size-1), args); //last element doesn't require a semicolon ;
-    return newline;
+    return newline + processHexValue(line_values.get(loop_end), args);
   }
  
   //replace with floats later
