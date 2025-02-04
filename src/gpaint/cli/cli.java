@@ -110,7 +110,9 @@ public class cli {
     if (args.length < 2) {return null;}
     int i = findArgument(args, argument);
     if (i == -1 || i == args.length-1) {return null;}
-    return args[i+1];
+    String value = args[i+1];
+    if (value.length() == 0 || value.charAt(0) == '-') {return null;}
+    return value;
   }
 
   private static boolean hasArgument(String[] args, String argument) {return findArgument(args, argument) != -1;}
