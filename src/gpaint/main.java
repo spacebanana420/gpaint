@@ -57,7 +57,11 @@ public class main {
   }
   
   static String generateNewFilename(String path, String customname) {
-    if (customname != null) {return new File(path).getParent() + System.getProperty("file.separator") + customname;}
+    if (customname != null) {
+      String parent = new File(path).getParent();
+      if (parent == null) {return customname;}
+      else {return parent + System.getProperty("file.separator") + customname;}
+    }
     String name = "";
     int extension_i = -1;
     for (int i = path.length()-1; i >= 0; i--)
