@@ -14,7 +14,8 @@ public class themeparse {
     for (int i = 0; i < lines.length; i++)
     {
       boolean validName = hasCustomName || !lines[i].contains("(GPaint version)");
-      if ((lines[i].contains("name=") || lines[i].contains("name =")) && validName)
+      String lowercase = lines[i].toLowerCase();
+      if ((lowercase.contains("name=") || lowercase.contains("name =")) && validName)
       {
         if (hasCustomName) {lines[i] = addCustomName(lines[i], customname);}
         else {lines[i] += " (GPaint version)";}
