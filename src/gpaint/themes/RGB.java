@@ -17,14 +17,15 @@ public class RGB {
     return "#" + r + g + b;
   }
   
-  public void adjustContrast(float percentage, boolean increase) { //fix contrast lowering
+  public void adjustContrast(float percentage, boolean increase) {
+    if (rgb_u[0] == rgb_u[1] && rgb_u[0] == rgb_u[2] && (rgb_u[0] == 0 || rgb_u[0] == 255)) {return;}
     if (percentage <= 0) {return;}
     else if (percentage > 100) {percentage = 100;}
     
     float increment = (float)(255 * (percentage/100));
     float average = (rgb_u[0] + rgb_u[1] + rgb_u[2]) / 3;
-    if (!increase) {increment = (short)(increment * -1);} //Lower contrast
-    if (average < 128) {increment = (short)(increment * -1);} //Whether increase or lower brightness
+    if (!increase) {increment = (float)(increment * -1);} //Lower contrast
+    if (average < 128) {increment = (float)(increment * -1);} //Whether increase or lower brightness
     else if (average == 128) {return;}
 
     short highest = 0;
@@ -105,13 +106,13 @@ public class RGB {
     if (rgb_u[2] < 0) {rgb_u[2] = 0;}
   }
   
-  //this might slow down things but it makes it simpler, i wish java had unsigned data types holy shit
-  //private short byteToUnsigned(byte b) {return (b >= 0) ? b : (short)(256 - (b * -1));}
+  //this might slow down things but it makes it simpler
   private short byteToUnsigned(byte b) {return (short)(b & 255);}
   
   private byte[] getRGB() {
     String hex_value = "";
     if (hex.length() < 2) {return null;}
+    
     //int = 1 to ignore first # character
     for (int i = 1; i < hex.length(); i++) {hex_value += hex.charAt(i);}
     if (hex_value.length() == 3) {
@@ -135,7 +136,7 @@ public class RGB {
     byte hex1b = getValueFromChar(hex1, chars, values);
     byte hex2b = getValueFromChar(hex2, chars, values);
     
-    return (byte)(hex1b * 16 + hex2b);
+    return (byte)((hex1b * 16) + hex2b);
   }
   private byte getValueFromChar(char hexdigit, char[] chars, byte[] values) {
     for (int i = 0; i < chars.length; i++) {
@@ -148,7 +149,7 @@ public class RGB {
     for (int i = 0; i < chars.length; i++) {
       if (digit == values[i]) {return chars[i];}
     }
-    return 0;
+    return '0';
   }
   
   private String RGBtoHex(short value) {
