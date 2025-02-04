@@ -63,23 +63,25 @@ public class main {
       else {return parent + System.getProperty("file.separator") + customname;}
     }
     String name = "";
+    String extension = "";
     int extension_i = -1;
     for (int i = path.length()-1; i >= 0; i--)
     {
       char c = path.charAt(i);
       if (c == '.') {extension_i = i; break;}
     }
-    if (extension_i == -1) {name = path;}
+    if (extension_i == -1) {name = path; extension = ".conf";}
     else {
       for (int i = 0; i < extension_i; i++) {name += path.charAt(i);}
+      for (int i = extension_i; i < path.length(); i++) {extension += path.charAt(i);}
     }
     int i = 0;
     while (true)
     {
-      String new_filename = name + "-GPaint-" + i + ".conf";
+      String new_filename = name + "-GPaint-" + i + extension;
       if (!new File(new_filename).isFile()) {break;}
       i++;
     }
-    return name + "-GPaint-" + i + ".conf";
+    return name + "-GPaint-" + i + extension;
   }
 }
