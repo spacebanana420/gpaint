@@ -1,6 +1,6 @@
 # GPaint
 
-GPaint is a theme editor for [Geany themes](https://www.geany.org/download/themes/). It allows you to adjust and manipulate the colors of a theme with contrast, saturation, temperature and more. GPaint also supports Xfce Terminal themes, and all theme files that are similar to Geany themes and Xfce Terminal themes.
+GPaint is a theme editor for [Geany themes](https://www.geany.org/download/themes/). It allows you to adjust and manipulate the colors of a theme with contrast, saturation, temperature and more. GPaint also supports Xfce Terminal themes and all theme files that are similar to Geany themes and Xfce Terminal themes.
 
 ## Using GPaint and Requirements
 
