@@ -1,13 +1,12 @@
 package gpaint.themes;
 
 public class RGB {
-  public byte[] rgb = new byte[]{0, 0, 0};
   public short[] rgb_u = new short[]{0, 0, 0};
   public String hex = "";
   
   public RGB(String color_hex) {
     hex = color_hex.toLowerCase();
-    rgb = getRGB();
+    byte[] rgb = getRGB();
     for (int i = 0; i < rgb.length; i++) {rgb_u[i] = byteToUnsigned(rgb[i]);}
   }
   
@@ -38,7 +37,6 @@ public class RGB {
       rgb_u[i] += increment * (rgb_u[i]/factor);
       if (rgb_u[i] < 0) {rgb_u[i] = 0;}
       else if (rgb_u[i] > 255) {rgb_u[i] = 255;}
-      rgb[i] = (byte)rgb_u[i];
     }
   }
   
@@ -66,7 +64,6 @@ public class RGB {
       else {
         rgb_u[i] = (short)(rgb_u[i] + ((highest - rgb_u[i]) * percentage_factor));
       }
-      rgb[i] = (byte)rgb_u[i];
     }
   }
     
