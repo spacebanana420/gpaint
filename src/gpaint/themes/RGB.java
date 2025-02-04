@@ -74,6 +74,14 @@ public class RGB {
     for (int i = 0; i < rgb_u.length; i++) {rgb_u[i] = (short)(255-rgb_u[i]);}
   }
   
+  public void invertExtremes() {
+    float average_brightness = (rgb_u[0] + rgb_u[1] + rgb_u[2]) / 3;
+    if (average_brightness > 30 && average_brightness < 225) {return;}
+    for (int i = 0; i < rgb_u.length; i++) {
+      rgb_u[i] = (short)(255-rgb_u[i]);
+    }
+  }
+  
   public void adjustBrightness(float percentage, boolean increase) {
     if (percentage <= 0) {return;}
     else if (percentage > 100) {percentage = 100;}

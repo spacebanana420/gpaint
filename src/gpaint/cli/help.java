@@ -22,6 +22,7 @@ public class help {
       + "\n  * -bright [percentage] - lowers brightness from 0 to 100"
       + "\n  * -temp [percentage] - lowers color temperature from 0 to 100"
       + "\n  * -invert - inverts the theme colors"
+      + "\n  * -invert-extr - inverts the very dark and very bright theme colors"
     );
   }
   

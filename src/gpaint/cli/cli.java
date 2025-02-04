@@ -84,11 +84,13 @@ public class cli {
   
   public static boolean invertColors(String[] args) {return hasArgument(args, "-invert");}
   
+  public static boolean invertExtremes(String[] args) {return hasArgument(args, "-invert-extr");}
+  
   public static boolean hasColorAdjustments(String[] args) {
     return
       hasArgument(args, "+sat") || hasArgument(args, "-sat")
       || hasArgument(args, "+contrast") || hasArgument(args, "-contrast")
-      || hasArgument(args, "-invert")
+      || hasArgument(args, "-invert") || hasArgument(args, "-invert-extr")
       || hasArgument(args, "+bright") || hasArgument(args, "-bright")
       || hasArgument(args, "-temp")
     ;

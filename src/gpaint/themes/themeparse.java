@@ -73,6 +73,7 @@ public class themeparse {
     RGB color = new RGB(hex);
     
     if (cli.invertColors(args)) {color.invertColors();}
+    if (cli.invertExtremes(args)) {color.invertExtremes();}
     
     byte percentage = cli.getContrastAdd(args);
     if (percentage != -1) {color.adjustContrast((float)percentage, true);}
