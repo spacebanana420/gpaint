@@ -145,11 +145,9 @@ public class RGB {
     return 0;
   }
   
-  private char getCharFromValue(byte digit, char[] chars, byte[] values) {
-    for (int i = 0; i < chars.length; i++) {
-      if (digit == values[i]) {return chars[i];}
-    }
-    return '0';
+  private char getCharFromValue(byte digit, char[] chars) {
+    if (digit >= 0 && digit < chars.length) {return chars[digit];}
+    else {return '0';}
   }
   
   private String RGBtoHex(short value) {
@@ -158,13 +156,12 @@ public class RGB {
     char digit0c;
     char digit1c;
     char[] chars = new char[]{'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f'};
-    byte[] values = new byte[]{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15};
     
     digit1 = (byte)(value % 16);
     digit0 = (byte)((value / 16) % 16);
     
-    digit0c = getCharFromValue(digit0, chars, values);
-    digit1c = getCharFromValue(digit1, chars, values);
+    digit0c = getCharFromValue(digit0, chars);
+    digit1c = getCharFromValue(digit1, chars);
     
     return "" + digit0c + digit1c;
   }
